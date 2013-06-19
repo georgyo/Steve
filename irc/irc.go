@@ -18,7 +18,7 @@ func (i *irc) Start(server string, user string) {
 			//ircConn.SSL = true
 
 			i.conn.AddHandler("connected", func(conn *goirc.Conn, line *goirc.Line) {
-				//conn.Join("#channel")
+				conn.Join("#nycrtest")
 				i.connected = true
 			})
 
@@ -33,7 +33,7 @@ func (i *irc) Start(server string, user string) {
 				fmt.Printf("Connection error: %s\n", err)
 			}
 
-			i.SendMessage("willemvds", "STEVE!")
+			i.SendMessage("georgyo", "STEVE!")
 
 			// Wait for disconnect
 			<-quit

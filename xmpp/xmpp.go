@@ -49,12 +49,19 @@ func (x *xmpp) receive(c chan bool) {
 			c <- false
 			return
 		}
-		cv := NewChatView(&chat)
-		for i := 0; i < len(x.hndChannels); i++ {
-			idx := i
-			go func() {
-				x.hndChannels[idx] <- cv
-			}()
+		
+		switch v := chat.(type) {
+		case goxmpp.Chat:
+			cv := NewChatView(&v)
+
+			for i := 0; i < len(x.hndChannels); i++ {
+				idx := i
+				go func() {
+					x.hndChannels[idx] <- cv
+				}()
+			}
+		case goxmpp.Presence:
+			fmt.Println("DEBUG: Got a presence")
 		}
 	}
 }

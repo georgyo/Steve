@@ -4,10 +4,10 @@ import (
 	"bufio"
 	"flag"
 	"fmt"
-	"github.com/willemvds/Steve/irc"
-	"github.com/willemvds/Steve/math"
-	"github.com/willemvds/Steve/xmpp"
-	"github.com/willemvds/Steve/zeromq"
+	"github.com/georgyo/nycrbot/irc"
+	"github.com/georgyo/nycrbot/math"
+	"github.com/georgyo/nycrbot/xmpp"
+	//"github.com/georgyo/nycrbot/zeromq"
 	"log"
 	"os"
 	"os/exec"
@@ -90,7 +90,7 @@ func main() {
 	}
 
 	freenode := irc.New()
-	freenode.Start("irc.freenode.org", "monkeysteve")
+	freenode.Start("irc.freenode.org", "nycrbot2")
 	IRCSendMessage = func(target string, message string) error {
 		return freenode.SendMessage(target, message)
 	}
@@ -107,10 +107,10 @@ func main() {
 	gtalk.AddHandler(UName)
 	gtalk.AddHandler(DoMath)
 
-	zmq := zeromq.New()
-	zmq.Start("tcp://127.0.0.1:4080")
-	zmq.AddHandler(PrintBytes)
-	zmq.AddHandler(Taxes)
+	//zmq := zeromq.New()
+	//zmq.Start("tcp://127.0.0.1:4080")
+	//zmq.AddHandler(PrintBytes)
+	//zmq.AddHandler(Taxes)
 
 	for {
 		in := bufio.NewReader(os.Stdin)
